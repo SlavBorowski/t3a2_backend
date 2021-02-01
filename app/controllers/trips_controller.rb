@@ -1,7 +1,9 @@
 class TripsController < ApplicationController
+  before_action :authenticate_user
 
   def create
-    trip = Trips.new(trip_params)
+    trip = Trip.new(trip_params)
+    trip.user_id = current_user.id
     if trip.save 
       render status: :created
     else
