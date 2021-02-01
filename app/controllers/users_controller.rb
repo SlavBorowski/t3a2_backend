@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save 
-      user.image.attach(params[:file])
       render status: :created
     else
       render status: :bad_request
