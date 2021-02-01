@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   # get "/profile", to: "users#show"
 
   get "/status", to: "status#index"
+
+  resources :trips, only: [:create]
 end
