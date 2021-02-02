@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
       render json: {message: "no_profile"}
     else
       render json: {
+        message: "profile",
         name: profile[0].name,
         image_url: url_for(profile[0].image),
         favorite_place: profile[0].favorite_place,
@@ -23,7 +24,6 @@ class ProfilesController < ApplicationController
       favorite_place: params[:favorite_place],
       bio: params[:bio]
       })
-    # profile = Profile.new(profile_params)
     profile.user_id = current_user.id
     if profile.save
       profile.image.attach(params[:file])
@@ -33,10 +33,9 @@ class ProfilesController < ApplicationController
     end    
   end
 
-  # private 
+  def destroy 
+    profile = Profile.where(user_id: current_user.id)
+    profile[0].destroy
+  end
 
-  # def profile_params 
-  #   params.require(:profile).permit(:name, :favorite_place, :bio)
-  # end
-  
 end
