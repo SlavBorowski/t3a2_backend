@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
-  has_one :profiles
   validates :email, presence: true, uniqueness: true
-  has_many :trips
+
+  has_one :profile, dependent: :delete
+  has_many :trips, dependent: :delete_all
 end
