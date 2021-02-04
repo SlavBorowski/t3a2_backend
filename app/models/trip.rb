@@ -11,4 +11,6 @@ class Trip < ApplicationRecord
     errors.add(:date, "can't be in the past") if
       !date.blank? and date < Date.today
   end
+
+  has_many :itinerary_items, dependent: :delete_all
 end
