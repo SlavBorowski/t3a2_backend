@@ -14,6 +14,11 @@ class TripsController < ApplicationController
   def index
     trips = Trip.where(user_id: current_user.id)
     
+    # trips.each do |trip|
+    #   items = ItineraryItem.where(trip_id: trip.id)
+    #   trip["itinerary_items"] = items
+    # end
+
     render json: trips
   end
 

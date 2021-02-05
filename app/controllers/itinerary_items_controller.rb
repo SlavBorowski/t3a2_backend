@@ -10,6 +10,11 @@ class ItineraryItemsController < ApplicationController
       render status: :bad_request
     end
   end
+  
+  def index
+    items = ItineraryItem.where(trip_id: params[:trip_id])
+    render json: items
+  end  
 
   private 
 
