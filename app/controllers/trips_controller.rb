@@ -11,13 +11,18 @@ class TripsController < ApplicationController
     end
   end
 
-  def index
+  def index_pending
     trips = Trip.where(user_id: current_user.id)
-    
-    # trips.each do |trip|
-    #   items = ItineraryItem.where(trip_id: trip.id)
-    #   trip["itinerary_items"] = items
-    # end
+    trips = trips.sort_by {|trip| trip.date}
+    trips = trips.select {|trip| trip.date >= Date.today }
+
+    render json: trips
+  end
+  
+  def index_completed
+    trips = Trip.where(user_id: current_user.id)
+    trips = trips.sort_by {|trip| trip.date}
+    trips = trips.select {|trip| trip.date < Date.today }
 
     render json: trips
   end
