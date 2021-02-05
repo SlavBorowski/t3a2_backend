@@ -11,6 +11,12 @@ class TripsController < ApplicationController
     end
   end
 
+  def index
+    trips = Trip.where(user_id: current_user.id)
+    
+    render json: trips
+  end
+
   private 
 
   def trip_params 

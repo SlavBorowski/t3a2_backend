@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   delete "/user", to: "users#destroy"
   delete "/profile", to: "profiles#destroy"
 
-  resources :trips, only: [:create]
+  resources :trips, only: [:create, :index]
 end
