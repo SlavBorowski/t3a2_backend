@@ -12,7 +12,12 @@ class ItineraryItemsController < ApplicationController
   end
   
   def index
-    items = ItineraryItem.where(trip_id: params[:trip_id])
+    trips = Trip.where(user_id: current_user.id)
+    items = []
+    trips.each do |trip|
+      items.concat(ItineraryItem.where(trip_id: trip.id))
+    end
+
     render json: items
   end  
 
