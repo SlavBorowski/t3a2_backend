@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   before_action :authenticate_user
 
   def show
-    trip = Trip.where(title: params[:trip_title])[0]
+    trip = Trip.find(params[:trip_id])
     render json: trip
   end
 
@@ -11,6 +11,17 @@ class TripsController < ApplicationController
     trip.user_id = current_user.id
     if trip.save 
       render status: :created
+    else
+      render status: :bad_request
+    end
+  end
+
+  def update 
+    # updating one trip
+    trip = Trip.find(params[:trip_id])
+    # p trip
+    if trip.update(trip_params)
+      render status: :no_content
     else
       render status: :bad_request
     end
