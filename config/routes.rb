@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 
   get "/profile", to: "profiles#show"
   get "/status", to: "status#index"
-  get "/itinerary", to: "itinerary_items#index"
   get "/trips_pending", to: "trips#index_pending"
   get "/trips_completed", to: "trips#index_completed"
+  get "/trips/:trip_title", to: "trips#show"
+  get "/:trip_id/itinerary", to: "itinerary_items#index_trip"
+  get "/itinerary", to: "itinerary_items#index"
 
   delete "/user", to: "users#destroy"
   delete "/profile", to: "profiles#destroy"

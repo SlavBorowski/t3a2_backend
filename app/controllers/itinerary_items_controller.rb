@@ -21,6 +21,11 @@ class ItineraryItemsController < ApplicationController
     render json: items
   end  
 
+  def index_trip
+    itinerary_items = ItineraryItem.where(trip_id: params[:trip_id])
+    render json: itinerary_items
+  end  
+
   private 
 
   def itinerary_item_params 

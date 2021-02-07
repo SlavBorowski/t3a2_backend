@@ -1,6 +1,11 @@
 class TripsController < ApplicationController
   before_action :authenticate_user
 
+  def show
+    trip = Trip.where(title: params[:trip_title])[0]
+    render json: trip
+  end
+
   def create
     trip = Trip.new(trip_params)
     trip.user_id = current_user.id
