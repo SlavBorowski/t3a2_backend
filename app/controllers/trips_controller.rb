@@ -19,12 +19,16 @@ class TripsController < ApplicationController
   def update 
     # updating one trip
     trip = Trip.find(params[:trip_id])
-    # p trip
     if trip.update(trip_params)
       render status: :no_content
     else
       render status: :bad_request
     end
+  end
+
+  def destroy
+    trip = Trip.find(params[:trip_id])
+    trip.destroy
   end
 
   def index_pending
