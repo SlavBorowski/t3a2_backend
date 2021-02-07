@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   delete "/user", to: "users#destroy"
   delete "/profile", to: "profiles#destroy"
+  delete "/trips/:trip_id", to: "trips#destroy"
 
   put "/trips/:trip_id", to: "trips#update"
 
