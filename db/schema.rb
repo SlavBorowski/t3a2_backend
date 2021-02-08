@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_04_041158) do
+ActiveRecord::Schema.define(version: 2021_02_08_004210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 2021_02_04_041158) do
     t.index ["trip_id"], name: "index_itinerary_items_on_trip_id"
   end
 
+  create_table "private_landmarks", force: :cascade do |t|
+    t.string "title"
+    t.string "city"
+    t.text "notes"
+    t.date "latest_visit"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_private_landmarks_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.string "favorite_place"
@@ -78,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_02_04_041158) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "itinerary_items", "trips"
+  add_foreign_key "private_landmarks", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "trips", "users"
 end
