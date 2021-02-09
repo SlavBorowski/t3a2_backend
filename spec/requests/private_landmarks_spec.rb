@@ -57,15 +57,14 @@ RSpec.describe "PrivateLandmarks", type: :request do
     end
   end
 
-  # describe "DELETE private_landmarks#destroy" do
-  #   it 'removes the Private Landmark from the database' do
-  #     @landmark_params = {title: "test_landmark_title3", city: "city", image_number: 0}
-  #     post private_landmark_path, params: @landmark_params, headers: authenticated_header
-  #     landmark_user_id = PrivateLandmark.last.user_id
-  #     p PrivateLandmark.all
-  #     delete `/private_landmarks/test_landmark_title3`, headers: authenticate_user_by_id(landmark_user_id)
-  #     expect(User.last.title).to_not eq(private_landmark[:title])
-  #   end
-  # end
+  describe "DELETE private_landmarks#destroy" do
+    it 'removes the Private Landmark from the database' do
+      @landmark_params = {title: "test_landmark_title3", city: "city", image_number: 0}
+      post private_landmark_path, params: @landmark_params, headers: authenticated_header
+      landmark = PrivateLandmark.last
+      delete "/private_landmark/#{landmark['title']}", headers: authenticate_user_by_id(landmark['user_id'])
+      expect(PrivateLandmark.last).to_not eq(landmark)
+    end
+  end
 end
 

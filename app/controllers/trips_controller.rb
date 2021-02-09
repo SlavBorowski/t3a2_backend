@@ -20,7 +20,7 @@ class TripsController < ApplicationController
     # updating one trip
     trip = Trip.find(params[:trip_id])
     if trip.update(trip_params)
-      render status: :no_content
+      render status: :ok
     else
       render status: :bad_request
     end
