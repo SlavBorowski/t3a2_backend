@@ -8,11 +8,8 @@ class PrivateLandmarksController < ApplicationController
     landmark = PrivateLandmark.where(user_id: current_user.id).where(title: params[:landmark_title])
     if landmark.length == 0 then
       # redirect to new
-      render json: {message: "no_landmark"}
-      p "redirected to form page"
-    # end
+      render json: { message: "no_landmark" }
     else
-      
       image_url = []
       landmark[0].image_attachments.map do |img| 
         image_url.push(url_for(img))
@@ -39,14 +36,11 @@ class PrivateLandmarksController < ApplicationController
       city: params[:city]
       })
     landmark.user_id = current_user.id
-    p landmark
     if landmark.save
-
       for i in 0..(params[:image_number].to_i-1)
         landmark.image.attach(params[:"file_#{i}"])
       end
-      
-      render status: :ok
+      render status: :created
     else 
       render status: :bad_request
     end    

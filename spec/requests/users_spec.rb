@@ -17,9 +17,9 @@ RSpec.describe "Users", type: :request do
       end
 
       describe "DELETE user#destroy" do
-        it 'saves the User to the database' do
+        it 'removes the User from the database' do
           user = FactoryBot.create(:user)
-          delete user_path, headers: authenticate_user(user)
+          delete "/user", headers: authenticate_user(user)
           expect(User.last.email).to_not eq(user[:email])
         end
       end

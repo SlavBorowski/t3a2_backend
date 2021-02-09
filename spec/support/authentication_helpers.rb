@@ -6,7 +6,11 @@ module AuthenticationHelpers
 
   def authenticate_user(user)
     token = Knock::AuthToken.new(payload: {sub: user.id}).token
+    { 'Authorization': "Bearer #{token}"}
+  end
 
+  def authenticate_user_by_id(user_id)
+    token = Knock::AuthToken.new(payload: {sub: user_id}).token
     { 'Authorization': "Bearer #{token}"}
   end
 end
