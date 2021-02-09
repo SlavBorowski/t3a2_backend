@@ -6,8 +6,6 @@ class ItineraryItemsController < ApplicationController
     itinerary_item.trip_id = Trip.where(title: params[:trip_title])[0].id
     if itinerary_item.save 
       render status: :created
-    else
-      render status: :bad_request
     end
   end
   
