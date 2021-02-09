@@ -5,4 +5,8 @@ FactoryBot.define do
     end
     password{"password"}
   end
+
+  trait :invalid do
+    email {nil}
+  end
 end

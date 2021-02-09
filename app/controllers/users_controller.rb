@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if user.save 
       render status: :created
     else
-      render status: :bad_request
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
