@@ -1,0 +1,26 @@
+require 'rails_helper'
+
+RSpec.describe Trip, type: :model do
+  subject { FactoryBot.build(:trip)}
+
+  context 'validations' do
+    it 'is valid with valid attributes' do
+      expect(subject).to be_valid
+    end
+
+    it 'is not valid without title' do
+      subject.title = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'is not valid without city' do
+      subject.city = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'is not valid without date' do
+      subject.date = nil
+      expect(subject).to_not be_valid
+    end
+  end
+end
